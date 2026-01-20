@@ -1,0 +1,16 @@
+mixin matrix(n)
+  - const size = Number(n)
+  - const half = Math.floor(size / 2)
+
+  if size > 0
+    table.matrix
+      tbody
+        - for (let i = 0; i < size; i++)
+          tr
+            - for (let j = 0; j < size; j++)
+              - const isTopRight = (i < half) && (j >= (size - half)) && (j <= (size - 1 - i))
+              - const isBottomLeft = (j < half) && (i >= (size - half)) && (i <= (size - 1 - j))
+              - const isDiag = (i === j) && (i >= (size - half))
+              - const isDark = isTopRight || isBottomLeft || isDiag
+              td(class=isDark ? "cell cell--dark" : "cell")
+
